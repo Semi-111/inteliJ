@@ -21,6 +21,7 @@ public class MainController {
 	
 	
 	public void mm() {
+		System.out.println("ssss");
 		
 	}
 

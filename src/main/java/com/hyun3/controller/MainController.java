@@ -22,6 +22,9 @@ public class MainController {
 		return mav;
 	}
 	
+	public void main2() {
+		
+	}
 	
 	
 }

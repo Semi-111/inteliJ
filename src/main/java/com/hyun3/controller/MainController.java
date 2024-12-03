@@ -18,6 +18,11 @@ public class MainController {
 		
 		return mav;
 	}
+	
+	
+	public void mm() {
+		
+	}
 
 	
 }

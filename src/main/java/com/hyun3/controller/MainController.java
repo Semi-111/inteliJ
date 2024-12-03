@@ -24,7 +24,7 @@ public class MainController {
 
 	
 	public void killMe(){
-		System.out.println("머리가 너무아프다");
+		System.out.println("이클립스 마지막 테스트");
 	}
 	
 	

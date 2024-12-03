@@ -24,7 +24,7 @@ public class MainController {
 
 	
 	public void killMe(){
-		System.out.println("인텔리제이 마지막 테스트");
+		System.out.println("인텔리제이 마지막의 마지막 테스트");
 	}
 	
 	

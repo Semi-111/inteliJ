@@ -24,7 +24,7 @@ public class MainController {
 
 	
 	public void killMe(){
-		System.out.println("깃허브 썩을");
+		System.out.println("머리가 너무아프다");
 	}
 	
 	

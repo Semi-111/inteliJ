@@ -21,7 +21,11 @@ public class MainController {
 		
 		return mav;
 	}
+
 	
+	public void killMe(){
+		System.out.println("깃허브 썩을");
+	}
 	
 	
 }

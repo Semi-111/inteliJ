@@ -25,7 +25,7 @@ public class HandlerExecution {
 		if(cls.getSimpleName().equals("void")) {
 			method.invoke(handler, req, resp);
 		} else if(cls.getSimpleName().equals("Map")) {
-			// 리턴 타입이 Map2222 인 경우
+			// 리턴 타입이 Map 인 경우
 			@SuppressWarnings("unchecked")
 			Map<String, Object> model = (Map<String, Object>)method.invoke(handler, req, resp);
 			

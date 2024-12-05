@@ -8,6 +8,7 @@ import com.hyun3.mvc.annotation.RequestMapping;
 import com.hyun3.mvc.view.ModelAndView;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -24,7 +25,7 @@ public class MainController {
 
 	
 	public void killMe(){
-		System.out.println("깃허브 썩을");
+		System.out.println("인텔리제이 마지막의 마지막 테스트");
 	}
 	
 	

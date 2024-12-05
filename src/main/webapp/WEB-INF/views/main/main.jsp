@@ -8,7 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>spring</title>
 
-<jsp:include page="/WEB-INF/views/layout/staticHeader.jsp"/>
+
+	<jsp:include page="/WEB-INF/views/layout/staticHeader.jsp"/>
 
 <style type="text/css">
 .body-container {
@@ -22,10 +23,10 @@
 <header>
 	<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 </header>
-	
+
 <main>
 	<div class="container">
-		<div class="body-container">	
+		<div class="body-container">
 			<div class="d-grid">
 				메인 화면 입니다.
 			</div>

@@ -1,3 +1,4 @@
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -12,6 +13,11 @@ target/
 *.iws
 *.iml
 *.ipr
+
+*.xml
+.mvn
+mvnw
+mvnw.cmd
 
 ### Eclipse ###
 .apt_generated

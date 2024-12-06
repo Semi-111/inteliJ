@@ -28,11 +28,6 @@ public class MemberDTO {
   public void setMemberIdx(Long memberIdx) {
     this.memberIdx = memberIdx;
   }
-  
-  private void syso() {
-	// TODO Auto-generated method stub
-
-}
 
   public String getUserId() {
     return userId;

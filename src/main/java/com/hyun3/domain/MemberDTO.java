@@ -1,32 +1,27 @@
 package com.hyun3.domain;
 
 public class MemberDTO {
-  private Long memberIdx;
-  private String userId; // o
-  private String userPwd; // o
-  private String userName; // o
-  private int userLevel; // o
-  private int enabled;
-  private String register_date; // o
-  private String modify_date;
-  private String email; // o
-  private String email1; // o
-  private String email2; // o
-  private String tel; // o 7
-  private String tel1; // o
-  private String tel2;
-  private String tel3;
-  private String birth;
-  private String zip;
-  private String addr1;
-  private String addr2;
+  private Long mb_Num; // 회원번호
+  private String userId; // 아이디
+  private String pwd; // 비밀번호
+  private String name; // 이름
+  private String nickName; // 닉네임
+  private int block; // 로그인가능 여부
+  private int role; // 회원권한
+  private int hak; // 학번
+  private String ca_Day; // 회원 가입일
+  private String modifyDay; // 회원 정보 수정날짜
+  private String email; // 이메일
+  private String tel; // 전화번호
+  private String birth; // 생일
 
-  public Long getMemberIdx() {
-    return memberIdx;
+
+  public Long getMb_Num() {
+    return mb_Num;
   }
 
-  public void setMemberIdx(Long memberIdx) {
-    this.memberIdx = memberIdx;
+  public void setMb_Num(Long mb_Num) {
+    this.mb_Num = mb_Num;
   }
 
   public String getUserId() {
@@ -37,52 +32,68 @@ public class MemberDTO {
     this.userId = userId;
   }
 
-  public String getUserPwd() {
-    return userPwd;
+  public String getPwd() {
+    return pwd;
   }
 
-  public void setUserPwd(String userPwd) {
-    this.userPwd = userPwd;
+  public void setPwd(String pwd) {
+    this.pwd = pwd;
   }
 
-  public String getUserName() {
-    return userName;
+  public String getName() {
+    return name;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public int getUserLevel() {
-    return userLevel;
+  public String getNickName() {
+    return nickName;
   }
 
-  public void setUserLevel(int userLevel) {
-    this.userLevel = userLevel;
+  public void setNickName(String nickName) {
+    this.nickName = nickName;
   }
 
-  public int getEnabled() {
-    return enabled;
+  public int getRole() {
+    return role;
   }
 
-  public void setEnabled(int enabled) {
-    this.enabled = enabled;
+  public void setRole(int role) {
+    this.role = role;
   }
 
-  public String getRegister_date() {
-    return register_date;
+  public int getBlock() {
+    return block;
   }
 
-  public void setRegister_date(String register_date) {
-    this.register_date = register_date;
+  public void setBlock(int block) {
+    this.block = block;
   }
 
-  public String getModify_date() {
-    return modify_date;
+  public int getHak() {
+    return hak;
   }
 
-  public void setModify_date(String modify_date) {
-    this.modify_date = modify_date;
+  public void setHak(int hak) {
+    this.hak = hak;
+  }
+
+  public String getCa_Day() {
+    return ca_Day;
+  }
+
+  public void setCa_Day(String ca_Day) {
+    this.ca_Day = ca_Day;
+  }
+
+  public String getModifyDay() {
+    return modifyDay;
+  }
+
+  public void setModifyDay(String modifyDay) {
+    this.modifyDay = modifyDay;
   }
 
   public String getEmail() {
@@ -93,22 +104,6 @@ public class MemberDTO {
     this.email = email;
   }
 
-  public String getEmail1() {
-    return email1;
-  }
-
-  public void setEmail1(String email1) {
-    this.email1 = email1;
-  }
-
-  public String getEmail2() {
-    return email2;
-  }
-
-  public void setEmail2(String email2) {
-    this.email2 = email2;
-  }
-
   public String getTel() {
     return tel;
   }
@@ -117,59 +112,11 @@ public class MemberDTO {
     this.tel = tel;
   }
 
-  public String getTel1() {
-    return tel1;
-  }
-
-  public void setTel1(String tel1) {
-    this.tel1 = tel1;
-  }
-
-  public String getTel2() {
-    return tel2;
-  }
-
-  public void setTel2(String tel2) {
-    this.tel2 = tel2;
-  }
-
-  public String getTel3() {
-    return tel3;
-  }
-
-  public void setTel3(String tel3) {
-    this.tel3 = tel3;
-  }
-
   public String getBirth() {
     return birth;
   }
 
   public void setBirth(String birth) {
     this.birth = birth;
-  }
-
-  public String getZip() {
-    return zip;
-  }
-
-  public void setZip(String zip) {
-    this.zip = zip;
-  }
-
-  public String getAddr1() {
-    return addr1;
-  }
-
-  public void setAddr1(String addr1) {
-    this.addr1 = addr1;
-  }
-
-  public String getAddr2() {
-    return addr2;
-  }
-
-  public void setAddr2(String addr2) {
-    this.addr2 = addr2;
   }
 }

@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2024학년도 1학기 수강신청 안내 - Trainee</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
+
     <style>
     
     * {

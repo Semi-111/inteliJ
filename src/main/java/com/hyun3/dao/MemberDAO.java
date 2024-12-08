@@ -12,34 +12,34 @@ import java.sql.SQLException;
 public class MemberDAO {
   private Connection conn = DBConn.getConnection();
 
-  public MemberDTO loginMember(String userId, String userPwd) {
+  public MemberDTO loginMember(String userId, String pwd) {
     MemberDTO dto = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     String sql;
 
     try {
-      sql = "SELECT memberIdx, userId, userName, "
-          + " userLevel, register_date, modify_date "
-          + " FROM member1 "
-          + " WHERE userId = ? AND userPwd = ? AND enabled = 1";
+      sql = "SELECT mb_Num, userId, NICKNAME, "
+          + " role, ca_Day, modifyDay "
+          + " FROM member "
+          + " WHERE userId = ? AND pwd = ? AND block = 1";
 
       pstmt = conn.prepareStatement(sql);
 
       pstmt.setString(1, userId);
-      pstmt.setString(2, userPwd);
+      pstmt.setString(2, pwd);
 
       rs = pstmt.executeQuery();
 
       if(rs.next()) {
         dto = new MemberDTO();
 
-        dto.setMemberIdx(rs.getLong("memberIdx"));
+        dto.setMb_Num(rs.getLong("mb_Num"));
         dto.setUserId(rs.getString("userId"));
-        dto.setUserName(rs.getString("userName"));
-        dto.setUserLevel(rs.getInt("userLevel"));
-        dto.setRegister_date(rs.getString("register_date"));
-        dto.setModify_date(rs.getString("modify_date"));
+        dto.setName(rs.getString("name"));
+        dto.setRole(rs.getInt("role"));
+        dto.setCa_Day(rs.getString("ca_Day"));
+        dto.setModifyDay(rs.getString("modifyDay"));
       }
 
     } catch (Exception e) {
@@ -59,29 +59,27 @@ public class MemberDAO {
     try {
       conn.setAutoCommit(false);
 
-      sql = "INSERT INTO member1(memberIdx, userId, userPwd, userName, enabled, userLevel, register_date, modify_date) "
-          + " VALUES (member_seq.NEXTVAL, ?, ?, ?, 1, 1, SYSDATE, SYSDATE)";
+      sql = "INSERT INTO member(mb_Num, userId, pwd, NICKNAME, nickName, block, role, ca_Day, modifyDay) "
+          + " VALUES (member_seq.NEXTVAL, ?, ?, ?, ?, 1, 1, SYSDATE, SYSDATE)";
       pstmt = conn.prepareStatement(sql);
 
       pstmt.setString(1, dto.getUserId());
-      pstmt.setString(2, dto.getUserPwd());
-      pstmt.setString(3, dto.getUserName());
+      pstmt.setString(2, dto.getPwd());
+      pstmt.setString(3, dto.getName());
+      pstmt.setString(4, dto.getNickName());
 
       pstmt.executeUpdate();
 
       pstmt.close();
       pstmt = null;
 
-      sql = "INSERT INTO member2(userId, birth, email, tel, zip, addr1, addr2) VALUES (?, TO_DATE(?,'YYYY-MM-DD'), ?, ?, ?, ?, ?)";
+      sql = "INSERT INTO dt_member(userId, birth, email, tel) VALUES (?, TO_DATE(?,'YYYY-MM-DD'), ?, ?, ?, ?, ?)";
       pstmt=conn.prepareStatement(sql);
 
       pstmt.setString(1, dto.getUserId());
       pstmt.setString(2, dto.getBirth());
       pstmt.setString(3, dto.getEmail());
       pstmt.setString(4, dto.getTel());
-      pstmt.setString(5, dto.getZip());
-      pstmt.setString(6, dto.getAddr1());
-      pstmt.setString(7, dto.getAddr2());
 
       pstmt.executeUpdate();
 
@@ -132,13 +130,12 @@ public class MemberDAO {
     StringBuilder sb = new StringBuilder();
 
     try {
-      sb.append("SELECT memberIdx, m1.userId, userPwd, userName, ");
-      sb.append("      enabled, userLevel, register_date, modify_date,");
+      sb.append("SELECT mb_Num, m1.userId, pwd, name, ");
+      sb.append("      block, role, ca_Day, modifyDay,");
       sb.append("      TO_CHAR(birth, 'YYYY-MM-DD') birth, ");
-      sb.append("      email, tel,");
-      sb.append("      zip, addr1, addr2");
+      sb.append("      email, tel");
       sb.append("  FROM member1 m1");
-      sb.append("  LEFT OUTER JOIN member2 m2 ON m1.userId=m2.userId ");
+      sb.append("  LEFT OUTER JOIN dt_member m2 ON m1.userId=m2.userId ");
       sb.append("  WHERE m1.userId = ?");
 
       pstmt = conn.prepareStatement(sb.toString());
@@ -150,38 +147,16 @@ public class MemberDAO {
       if(rs.next()) {
         dto = new MemberDTO();
 
-        dto.setMemberIdx(rs.getLong("memberIdx"));
+        dto.setMb_Num(rs.getLong("mb_Num"));
         dto.setUserId(rs.getString("userId"));
-        dto.setUserPwd(rs.getString("userPwd"));
-        dto.setUserName(rs.getString("userName"));
-        dto.setEnabled(rs.getInt("enabled"));
-        dto.setUserLevel(rs.getInt("userLevel"));
-        dto.setRegister_date(rs.getString("register_date"));
-        dto.setModify_date(rs.getString("modify_date"));
+        dto.setPwd(rs.getString("pwd"));
+        dto.setName(rs.getString("name"));
+        dto.setBlock(rs.getInt("block"));
+        dto.setRole(rs.getInt("role"));
+        dto.setCa_Day(rs.getString("ca_Day"));
+        dto.setModifyDay(rs.getString("modifyDay"));
         dto.setBirth(rs.getString("birth"));
         dto.setTel(rs.getString("tel"));
-
-        if(dto.getTel() != null) {
-          String[] ss = dto.getTel().split("-");
-          if(ss.length == 3) {
-            dto.setTel1(ss[0]);
-            dto.setTel2(ss[1]);
-            dto.setTel3(ss[2]);
-          }
-        }
-
-        dto.setEmail(rs.getString("email"));
-        if(dto.getEmail() != null) {
-          String[] ss = dto.getEmail().split("@");
-          if(ss.length == 2) {
-            dto.setEmail1(ss[0]);
-            dto.setEmail2(ss[1]);
-          }
-        }
-
-        dto.setZip(rs.getString("zip"));
-        dto.setAddr1(rs.getString("addr1"));
-        dto.setAddr2(rs.getString("addr2"));
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -198,10 +173,10 @@ public class MemberDAO {
     String sql;
 
     try {
-      sql = "UPDATE member1 SET userPwd=?, modify_date=SYSDATE WHERE userId=?";
+      sql = "UPDATE member SET pwd=?, modifyDay=SYSDATE WHERE userId=?";
       pstmt = conn.prepareStatement(sql);
 
-      pstmt.setString(1, dto.getUserPwd());
+      pstmt.setString(1, dto.getPwd());
       pstmt.setString(2, dto.getUserId());
 
       pstmt.executeUpdate();
@@ -209,16 +184,13 @@ public class MemberDAO {
       pstmt.close();
       pstmt = null;
 
-      sql = "UPDATE member2 SET birth=TO_DATE(?,'YYYY-MM-DD'), email=?, tel=?, zip=?, addr1=?, addr2=? WHERE userId=?";
+      sql = "UPDATE dt_member SET birth=TO_DATE(?,'YYYY-MM-DD'), email=?, tel=?, WHERE userId=?";
       pstmt = conn.prepareStatement(sql);
 
       pstmt.setString(1, dto.getBirth());
       pstmt.setString(2, dto.getEmail());
       pstmt.setString(3, dto.getTel());
-      pstmt.setString(4, dto.getZip());
-      pstmt.setString(5, dto.getAddr1());
-      pstmt.setString(6, dto.getAddr2());
-      pstmt.setString(7, dto.getUserId());
+      pstmt.setString(4, dto.getUserId());
 
       pstmt.executeUpdate();
 
@@ -230,15 +202,15 @@ public class MemberDAO {
     }
   }
 
-  public void updateMemberLevel(String userId, int userLevel) throws SQLException {
+  public void updateMemberLevel(String userId, int role) throws SQLException {
     PreparedStatement pstmt = null;
     String sql;
 
     try {
-      sql = "UPDATE member1 SET userLevel=? WHERE userId=?";
+      sql = "UPDATE member SET role=? WHERE userId=?";
       pstmt = conn.prepareStatement(sql);
 
-      pstmt.setInt(1, userLevel);
+      pstmt.setInt(1, role);
       pstmt.setString(2, userId);
 
       pstmt.executeUpdate();
@@ -256,7 +228,7 @@ public class MemberDAO {
     String sql;
 
     try {
-      sql = "UPDATE member1 SET enabled=0, userLevel=0 WHERE userId=?";
+      sql = "UPDATE member SET block.=0, role=0 WHERE userId=?";
       pstmt = conn.prepareStatement(sql);
 
       pstmt.setString(1, userId);
@@ -266,7 +238,7 @@ public class MemberDAO {
       pstmt.close();
       pstmt = null;
 
-      sql = "DELETE FROM member2 WHERE userId=?";
+      sql = "DELETE FROM dt_member WHERE userId=?";
       pstmt = conn.prepareStatement(sql);
 
       pstmt.setString(1, userId);

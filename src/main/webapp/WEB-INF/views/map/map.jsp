@@ -24,7 +24,7 @@
         }
 
         #search {
-            width: 300px;
+            width: 400px;
             padding: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             position: absolute;
@@ -80,31 +80,37 @@
             border-bottom: 1px solid #ddd;
         }
     </style>
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=testyeoahv"></script>
+    <script type="text/javascript"
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=testyeoahv"></script>
 </head>
 <body>
-<button id="toggleButton" class="btn btn-primary" onclick="toggleSearch()">☰</button>
-<div id="search">
-    <div class="search-header">
-        <h2>검색</h2>
-        <button class="btn btn-secondary" onclick="toggleSearch()">닫기</button>
+
+<main>
+    <button id="toggleButton" class="btn btn-primary" onclick="toggleSearch()">☰</button>
+    <div id="search">
+        <div class="search-header">
+            <h2>검색</h2>
+            <button class="btn btn-secondary" onclick="toggleSearch()">닫기</button>
+        </div>
+        <input type="text" id="searchInput" placeholder="검색어를 입력하세요" class="form-control mb-2">
+        <button onclick="searchPlaces()" class="btn btn-primary">검색</button>
+        <div class="search-results">
+            <ul id="results"></ul>
+        </div>
     </div>
-    <input type="text" id="searchInput" placeholder="검색어를 입력하세요" class="form-control mb-2">
-    <button onclick="searchPlaces()" class="btn btn-primary">검색</button>
-    <div class="search-results">
-        <ul id="results"></ul>
-    </div>
-</div>
-<div id="map"></div>
+</main>
+    <div id="map"></div>
+
 
 <script>
-    var map = new naver.maps.Map('map', {
+
+    let map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(37.556601, 126.919494),
         zoom: 16
     });
 
     function toggleSearch() {
-        var searchDiv = document.getElementById('search');
+        let searchDiv = document.getElementById('search');
         if (searchDiv.classList.contains('closed')) {
             searchDiv.classList.remove('closed');
         } else {
@@ -113,20 +119,7 @@
     }
 
     function searchPlaces() {
-        var keyword = document.getElementById('searchInput').value;
-        naver.maps.Service.geocode({query: keyword}, function (status, response) {
-            if (status !== naver.maps.Service.Status.OK) {
-                return alert('Something went wrong!');
-            }
-            var result = response.v2.addresses[0];
-            var location = new naver.maps.LatLng(result.y, result.x);
-            map.setCenter(location);
-            new naver.maps.Marker({
-                position: location,
-                map: map
-            });
-            document.getElementById('results').innerHTML = '<li>' + result.roadAddress + '</li>';
-        });
+
     }
 </script>
 </body>

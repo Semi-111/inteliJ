@@ -1,33 +1,49 @@
 package com.hyun3.domain;
 
 public class SessionInfo {
-	private Long memberIdx;
+	private Long mb_Num; // 회원번호
 	private String userId;
-	private String userName;
-	private int userLevel;
-	
-	public Long getMemberIdx() {
-		return memberIdx;
+	private String name;
+	private int role;
+	private int nickName;
+
+	public Long getMb_Num() {
+		return mb_Num;
 	}
-	public void setMemberIdx(Long memberIdx) {
-		this.memberIdx = memberIdx;
+
+	public void setMb_Num(Long mb_Num) {
+		this.mb_Num = mb_Num;
 	}
+
 	public String getUserId() {
 		return userId;
 	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getUserName() {
-		return userName;
+
+	public String getName() {
+		return name;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public int getUserLevel() {
-		return userLevel;
+
+	public int getRole() {
+		return role;
 	}
-	public void setUserLevel(int userLevel) {
-		this.userLevel = userLevel;
+
+	public void setRole(int role) {
+		this.role = role;
+	}
+
+	public int getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(int nickName) {
+		this.nickName = nickName;
 	}
 }

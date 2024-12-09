@@ -20,9 +20,6 @@ public class MapController {
     public ModelAndView mapMain(HttpServletRequest req , HttpServletResponse resp) throws ServletException, IOException {
         ModelAndView mav = new ModelAndView("map/map");
 
-
-
-
         return mav;
     }
 

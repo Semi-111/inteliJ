@@ -23,6 +23,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util-jquery.js"></script>
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu2.js"></script>
+
     <style>
         body {
             display: flex;
@@ -35,15 +36,15 @@
             padding: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             position: absolute;
-            left: -300px;
+            display: block; /* 처음 화면에서 검색창이 보이도록 설정 */
             top: 0;
             height: 100%;
             background: white;
-            transition: left 0.3s ease;
+            transition: display 0.3s ease;
         }
 
-        #search.open {
-            left: 0;
+        #search.closed {
+            display: none; /* 검색창을 숨기기 위해 display 속성 사용 */
         }
 
         #map {
@@ -54,14 +55,13 @@
             position: absolute;
             left: 0;
             top: 20px;
-            z-index: 1000;
+            z-index: 1001; /* z-index를 높여서 버튼이 다른 요소들 위에 표시되도록 함 */
             font-size: 1.5rem;
             background-color: #6f42c1;
             color: white;
         }
     </style>
-    <script type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=testyeoahv"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=testyeoahv"></script>
 </head>
 <body>
 <button id="toggleButton" class="btn btn-primary" onclick="toggleSearch()">☰</button>
@@ -76,15 +76,17 @@
 <script>
     var map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(37.5665, 126.9780),
-        zoom: 10
+        //zoom: 7 // 초기 줌 레벨을 더 가깝게 설정
+        minZoom: 7
+
     });
 
     function toggleSearch() {
         var searchDiv = document.getElementById('search');
-        if (searchDiv.classList.contains('open')) {
-            searchDiv.classList.remove('open');
+        if (searchDiv.classList.contains('closed')) {
+            searchDiv.classList.remove('closed');
         } else {
-            searchDiv.classList.add('open');
+            searchDiv.classList.add('closed');
         }
     }
 

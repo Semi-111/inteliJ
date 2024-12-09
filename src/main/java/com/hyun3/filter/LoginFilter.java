@@ -61,7 +61,7 @@ public class LoginFilter implements Filter {
 
 			return;
 		} else if(info != null && uri.indexOf("admin") != -1) {
-			if(info.getUserLevel() < 51) {
+			if(info.getRole() < 51) {
 				resp.sendRedirect(cp + "/member/noAuthorized");
 				return;
 			}
@@ -94,7 +94,7 @@ public class LoginFilter implements Filter {
 				"/index.jsp", "/main", 
 				"/member/login", "/member/logout",
 				"/member/member", "/member/userIdCheck", "/member/complete",
-				"/notice/list",
+				"/notice/list","/map",
 				"/uploads/photo/**",
 				"/resources/**"
 		};

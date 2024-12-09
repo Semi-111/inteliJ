@@ -80,8 +80,7 @@
             border-bottom: 1px solid #ddd;
         }
     </style>
-    <script type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=testyeoahv"></script>
+
 </head>
 <body>
 
@@ -99,28 +98,69 @@
         </div>
     </div>
 </main>
-    <div id="map"></div>
+<div id="map"></div>
 
 
-<script>
+<script type="module">
 
-    let map = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(37.556601, 126.919494),
-        zoom: 16
-    });
+    import config from "../../../resources/js/apiKey.js";
 
-    function toggleSearch() {
-        let searchDiv = document.getElementById('search');
-        if (searchDiv.classList.contains('closed')) {
-            searchDiv.classList.remove('closed');
-        } else {
-            searchDiv.classList.add('closed');
+    const ncpClientId = config.NAVER_CLIENT_ID;
+
+
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ncpClientId}`;
+    document.head.appendChild(script);
+
+    script.onload = () => {
+        let map = new naver.maps.Map('map', {
+            center: new naver.maps.LatLng(37.556601, 126.919494),
+            zoom: 16
+        });
+
+        function toggleSearch() {
+            let searchDiv = document.getElementById('search');
+            if (searchDiv.classList.contains('closed')) {
+                searchDiv.classList.remove('closed');
+            } else {
+                searchDiv.classList.add('closed');
+            }
         }
-    }
 
-    function searchPlaces() {
+        function searchPlaces() {
 
-    }
+        }
+
+        window.toggleSearch = toggleSearch;
+        window.searchPlaces = searchPlaces;
+    };
 </script>
+
+
+
+<%--<script type="text/javascript"--%>
+
+<%--        src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=testyeoahv"></script>--%>
+<%--<script>--%>
+<%--    let map = new naver.maps.Map('map', {--%>
+<%--        center: new naver.maps.LatLng(37.556601, 126.919494),--%>
+<%--        zoom: 16--%>
+<%--    });--%>
+
+<%--    function toggleSearch() {--%>
+<%--        let searchDiv = document.getElementById('search');--%>
+<%--        if (searchDiv.classList.contains('closed')) {--%>
+<%--            searchDiv.classList.remove('closed');--%>
+<%--        } else {--%>
+<%--            searchDiv.classList.add('closed');--%>
+<%--        }--%>
+<%--    }--%>
+
+<%--    function searchPlaces() {--%>
+
+<%--    }--%>
+<%--</script>--%>
+
 </body>
 </html>

@@ -84,31 +84,10 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">상단바</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">게시판</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">시간표</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">학점계산기</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">장터</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+
+<header>
+    <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+</header>
 
     <button id="toggleButton" class="btn btn-primary" onclick="toggleSearch()">☰</button>
     <div id="search">

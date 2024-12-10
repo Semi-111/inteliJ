@@ -13,7 +13,7 @@
 <body>
 
 <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a3d5e557866e58ead34c0df86f677b&libraries=services"></script>
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakao}&libraries=services"></script>
 <script>
     var places = new kakao.maps.services.Places();
 
